@@ -60,7 +60,7 @@ const SavingSegment = () =>{
     }
 
     const handleRemoveScheme = (index) =>{
-        if(schemaSelectCount.length > 1){
+        if(schemaSelectCount.length > 1 && index===schemaSelectCount.length-1){
             setSchemaSelectCount((prevState)=>prevState.slice(0,prevState.length-1))
             setSchemaValue((prevState)=>{
                 prevState[index] = undefined
@@ -164,7 +164,8 @@ const SavingSegment = () =>{
                                 <i className="material-icons">keyboard_arrow_down</i>
                                 <div className="remove-schema">
                                     <i className="material-icons" onClick={()=>handleRemoveScheme(idx)}
-                                    style={schemaSelectCount.length===1?{color:'#999', cursor:'default'}:{}}>
+                                    style={schemaSelectCount.length===1 || schemaSelectCount.length-1>idx?
+                                    {color:'#999', cursor:'default'}:{}}>
                                         remove
                                     </i>
                                 </div>

@@ -1,5 +1,4 @@
-import { useRef } from 'react'
-import useEventListener from 'react-event-handler-global'
+import { useEffect, useRef } from 'react'
 import M from 'materialize-css'
 
 import SavingSegment from '../Components/SavingSegment'
@@ -9,13 +8,13 @@ const ViewAudience = () =>{
 
     const sidenavRef = useRef()
 
-    useEventListener('DOMContentLoaded', ()=>{
+    useEffect(()=>{
         M.Sidenav.init(sidenavRef?.current,{
             edge: 'right',
             inDuration: 500,
             outDuration: 500
         })
-    })
+    },[])
 
     return(
         <div className="view-audience">

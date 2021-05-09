@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 import M from 'materialize-css'
 
 import Header from './Header'
+import Loader from './Loader'
 import '../styles/SavingSegment.css'
 
 const SavingSegment = () =>{
@@ -21,6 +22,8 @@ const SavingSegment = () =>{
     const [schema, setSchema] = useState(schemaObj)
     const [schemaValue, setSchemaValue] = useState({})
     const [schemaSelectCount, setSchemaSelectCount] = useState([1])
+
+    const [showloading, setShowLoading] = useState(false)
 
     const clearForm = useCallback(()=> {
         setSchema(schemaObj)
@@ -56,6 +59,24 @@ const SavingSegment = () =>{
         }
     }
 
+    const handleRemoveScheme = (index) =>{
+        if(schemaSelectCount.length > 1){
+            setSchemaSelectCount((prevState)=>prevState.slice(0,prevState.length-1))
+            setSchemaValue((prevState)=>{
+                prevState[index] = undefined
+                return prevState
+            })
+            setSchema((prevState)=>(
+                prevState.map((item)=>{
+                    if(item.value === schemaValue[index]){
+                        item.selected = false
+                    }
+                    return item
+                })
+            ))
+        }
+    }
+
     const handleSaveSegment = async (e) =>{
         M.Toast.dismissAll()
         e.preventDefault()
@@ -77,11 +98,13 @@ const SavingSegment = () =>{
                     }
                 })
             })
+            setShowLoading(true)
             const res = await fetch('https://webhook.site/35f5712e-6470-4c7e-9948-dd6040710736',{
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
             })
+            setShowLoading(false)
             if(res.status===200){
                 M.toast({html: 'Data posted to server successfully!', classes: '#388e3c green darken-2'})
                 clearForm()
@@ -98,6 +121,7 @@ const SavingSegment = () =>{
     return(
         <div className="saving-segment">
             <Header title="Saving Segment" />
+            {showloading && <Loader style={{top:57+'px'}} />}
             <form className="segment-form" onSubmit={(e)=>handleSaveSegment(e)}>
                 <div className="segment-name">
                     <p> Enter the Name of the Segment </p>
@@ -139,13 +163,22 @@ const SavingSegment = () =>{
                                 </select>
                                 <i className="material-icons">keyboard_arrow_down</i>
                                 <div className="remove-schema">
-                                    <i className="material-icons">remove</i>
+                                    <i className="material-icons" onClick={()=>handleRemoveScheme(idx)}
+                                    style={schemaSelectCount.length===1?{color:'#999', cursor:'default'}:{}}>
+                                        remove
+                                    </i>
                                 </div>
                             </div>
                         ))
                     }
                     </div>
-                    <small onClick={handleAddSchema}> + <span> Add new Schema </span> </small>
+                    {
+                        schemaSelectCount.length < 7 && 
+                        <p onClick={handleAddSchema}> 
+                            + 
+                            <span> Add new Schema </span> 
+                        </p>
+                    }
                     <div className="segment-btns">
                         <button type="submit" className="btn #1de9b6 teal accent-3"> Save the Segment </button>
                         <button type="button" className="btn sidenav-close #ffffff white" onClick={clearForm}> 

@@ -1,0 +1,152 @@
+.saving-segment{
+    height: 100%;
+}
+
+.segment-form{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    height: 90%;
+    overflow-y: auto;
+}
+
+.segment-name{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.segment-name > p{
+    font-size: 14.4px;
+    margin-bottom: 12px;
+}
+
+.input-div{
+    border-radius: 3px;
+    border: 1px solid rgb(187, 187, 187);
+    padding: 7px 10px;
+    width: 95%;
+    margin-bottom: 18px;
+}
+
+.input-div > input[type=text]{
+    border: 0;
+    width: 100%;
+}
+
+.segment-name > p:nth-of-type(2){
+    margin-bottom: 15px;
+}
+
+.schema-legends{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.legend{
+    margin-left: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.legend > p{
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    margin-right: 4px;
+}
+
+.segment-schema{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    margin-left: 10px;
+    height: 100%;
+}
+
+.schema-select{
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.select-row{
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    position: relative;
+}
+
+.select-row > p{
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    background-color: rgb(223, 223, 223);
+}
+
+.select-row > select{
+    margin: 0px 10px 0px 10px;
+    width: 80%;
+    height: 35px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 3px;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none; 
+}
+
+.select-row > i{
+    position: absolute;
+    right: 15%;
+}
+
+.remove-schema{
+    padding: 17px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 5px;
+    position: relative;
+}
+
+.remove-schema > i{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    cursor: pointer;
+}
+
+.segment-schema > small{
+    color: blue;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.segment-schema > small > span{
+    border-bottom: 1px blue solid;
+    padding-bottom: 2px;
+    cursor: pointer;
+}
+
+.segment-btns{
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.segment-btns > button{
+    border-radius: 5px;
+    margin-right: 10px;
+    text-transform: none;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.segment-btns > button:nth-of-type(2){
+    color: rgb(78, 190, 78);
+}
+
+@media only screen and (max-width:600px) {
+    .select-row > i{
+        right: 18%;
+    }
+}

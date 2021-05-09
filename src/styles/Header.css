@@ -1,0 +1,8 @@
+.nav > p{
+    display: flex;
+    font-weight: 700;
+}
+
+.nav > p > i{
+    cursor: pointer;
+}  
